@@ -1,4 +1,5 @@
 "use client";
+import CardCarousel from "@/components/CardCarousel";
 import ImageSwiper from "@/components/ImageSwiper";
 import { ModeToggle } from "@/components/ModeToggle";
 import Image from "next/image";
@@ -25,8 +26,8 @@ export default function Home() {
   const image = images[currentImageIndex];
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <div className="aspect-video overflow-hidden flex items-center max-w-[50vw] mx-auto border">
+    <main className="min-h-screen relative">
+      {/* <div className="aspect-video overflow-hidden flex items-center max-w-[80vw] mx-auto border">
         <Image
           src={image.src}
           alt={image.alt}
@@ -55,7 +56,8 @@ export default function Home() {
             />
           </div>
         ))}
-      </div>
+      </div> */}
+      <CardCarousel />
     </main>
   );
 }

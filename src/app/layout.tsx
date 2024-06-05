@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} max-w-[90vw] relative mx-auto`}>
+      <body className={`${inter.className} max-w-[95vw] mx-auto`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
