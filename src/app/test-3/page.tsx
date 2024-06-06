@@ -67,12 +67,12 @@ export default function Page() {
 
   return (
     <div className="gallery relative w-full flex z-0">
-      <div className="minimap sticky top-0 w-[25%] h-screen pt-[300px] overflow-hidden bg-black transition-[0.5]">
+      <div className="minimap bg-red-400 sticky top-0 w-[25%] h-screen pt-[300px] overflow-hidden bg-black transition-[0.5]">
         <div className="preview absolute top-[50%] w-full h-[1254px] flex flex-col items-center -translate-x-1/2">
           {images.map((img, index) => (
             <div
               key={index}
-              className={`relative w-[100px] h-[125px] left-[50%] p-5 overflow-hidden "
+              className={`relative w-full snap-y snap-center bg-yellow-50 h-[125px] left-[50%] p-5 overflow-hidden "
             //     currentImageIndex === index ? "" : ""
             //   }`}
               //   onClick={() => setCurrentImageIndex(index)} // Set the current image index on click
@@ -87,7 +87,7 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <div className="active-img-indicator absolute top-[300px] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm h-[125px] w-[100px] mix-blend-difference z-[2px]"></div>
+        <div className="active-img-indicator absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm h-[125px] w-[100px] mix-blend-difference z-[2px]"></div>
       </div>
       <div className="images relative top-0 w-[75%]">
         {images.map((img, index) => (

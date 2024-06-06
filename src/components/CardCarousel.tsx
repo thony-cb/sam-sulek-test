@@ -151,8 +151,8 @@ const CardCarousel: React.FC = () => {
         }
       ).fromTo(
         element,
-        { xPercent: 1000 },
-        { xPercent: -1000, duration: 1, ease: "none", immediateRender: false },
+        { xPercent: 600 },
+        { xPercent: -600, duration: 1, ease: "none", immediateRender: false },
         0
       );
       return tl;
