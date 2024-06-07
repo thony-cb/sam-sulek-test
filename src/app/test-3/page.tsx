@@ -68,7 +68,7 @@ export default function Page() {
   return (
     <div className="gallery relative w-full flex z-0">
       <div className="minimap bg-red-400 sticky top-0 w-[25%] h-screen pt-[300px] overflow-hidden bg-black transition-[0.5]">
-        <div className="preview absolute top-[50%] w-full h-[1254px] flex flex-col items-center -translate-x-1/2">
+        <div className="preview absolute top-[40%] w-full h-fit flex flex-col items-center -translate-x-1/2">
           {images.map((img, index) => (
             <div
               key={index}
@@ -80,8 +80,8 @@ export default function Page() {
               <Image
                 src={img.src}
                 alt={img.alt}
-                width={600}
-                height={44}
+                width={166}
+                height={100}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -156,6 +156,41 @@ const images = [
     height: 491,
     alt: "Sam Image 4",
     title: "Spring Cut Day 68 - Other Side",
+  },
+  {
+    src: "/assets/SamImg1.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Other Side",
+  },
+  {
+    src: "/assets/SamImg1.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Other Side",
+  },
+  {
+    src: "/assets/SamImg1.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Other Side",
+  },
+  {
+    src: "/assets/SamImg1.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Other Side",
+  },
+  {
+    src: "/assets/SamImg1.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Other Side",
   },
   {
     src: "/assets/SamImg1.jpg",

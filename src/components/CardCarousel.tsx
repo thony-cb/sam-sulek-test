@@ -208,8 +208,8 @@ const CardCarousel: React.FC = () => {
       </ul>
 
       {/* Add preview buttons */}
-      <div className="flex flex-row gap-4 absolute bottom-[10%] items-center mt-4">
-        {images.map((img, index) => (
+      <div className="flex cards flex-row gap-4 absolute bottom-[10%] items-center mt-4">
+        {images.map((image, index) => (
           <div
             key={index}
             className={`flex items-center justify-center p-2 ${
@@ -220,10 +220,10 @@ const CardCarousel: React.FC = () => {
             onClick={() => setCurrentImageIndex(index)} // Set the current image index on click
           >
             <Image
-              src={img.src}
-              alt={img.alt}
-              width={88}
-              height={44}
+              src={image.src}
+              alt={image.alt}
+              width={166}
+              height={100}
               className="object-cover"
             />
           </div>
