@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Draggable } from "gsap/Draggable";
 import Image from "next/image";
+import MainImage from "./MainImage";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 const CardCarousel: React.FC = () => {
@@ -27,6 +28,7 @@ const CardCarousel: React.FC = () => {
       offset: 0,
       onUpdate() {
         seamlessLoop.time(wrapTime(playhead.offset)); // Update the seamless loop time based on playhead offset
+        setCurrentImageIndex(getCurrentCardIndex(playhead.offset)); //Update current image index
       },
       duration: 0.5,
       ease: "power3",
@@ -48,7 +50,7 @@ const CardCarousel: React.FC = () => {
           scrub.invalidate().restart(); // Restart the scrub animation
         }
       },
-      end: "+=3000",
+      end: "+=4000",
       pin: galleryRef.current, // Pin the gallery element
     });
 
@@ -137,14 +139,14 @@ const CardCarousel: React.FC = () => {
       const tl = gsap.timeline();
       tl.fromTo(
         element,
-        { scale: 1, opacity: 0 },
+        { scale: 1, opacity: 1 },
         {
           scale: 1,
 
           opacity: 1,
           zIndex: 10,
           duration: 0.5,
-          yoyo: true,
+          yoyo: false,
           repeat: 1,
           ease: "power1.in",
           immediateRender: false,
@@ -156,6 +158,12 @@ const CardCarousel: React.FC = () => {
         0
       );
       return tl;
+    }
+    function getCurrentCardIndex(offset) {
+      const totalCards = cards.length;
+      const progress = offset / seamlessLoop.duration();
+      const index = Math.round(progress * totalCards) % totalCards;
+      return index;
     }
 
     // Draggable instance for dragging functionality
@@ -170,6 +178,9 @@ const CardCarousel: React.FC = () => {
         scrub.invalidate().restart();
       },
       onDragEnd() {
+        setCurrentImageIndex(getCurrentCardIndex(playhead.offset)); //Update current image index
+        console.log(`iteration ${iteration}`);
+        console.log(`playhead ${getCurrentCardIndex(playhead.offset)}`);
         scrollToOffset(scrub.vars.offset);
       },
     });
@@ -185,14 +196,14 @@ const CardCarousel: React.FC = () => {
   return (
     <div
       ref={galleryRef}
-      className="gallery absolute w-full h-screen overflow-x-hidden"
+      className="gallery absolute w-full top-0 left-0 flex  h-screen overflow-x-hidden"
     >
-      <ul className="cards absolute w-[70vw] aspect-video bg-red-600 top-[50%] left-[50%]  -translate-x-1/2 -translate-y-1/2">
+      <MainImage ImageIndex={currentImageIndex} />
+      <ul className="cards absolute w-[25vw] lg:w-[10vw] aspect-video  top-[90vh] left-[50%]  -translate-x-1/2 -translate-y-1/2">
         {images.map((image, index) => (
           <li
             key={index}
             className="w-full h-full cursor-grabbing  top-0 left-0 absolute"
-            onClick={() => setCurrentImageIndex(index)} // Set the current image index on click
           >
             <Image
               className="w-full h-full object-cover pointer-events-none"
@@ -202,40 +213,10 @@ const CardCarousel: React.FC = () => {
               alt={image.alt}
               title={image.title}
             />
-            <p className="text-xs text-white">{image.title}</p>
           </li>
         ))}
       </ul>
-
-      {/* Add preview buttons */}
-      <div className="flex cards flex-row gap-4 absolute bottom-[10%] items-center mt-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`flex items-center justify-center p-2 ${
-              currentImageIndex === index
-                ? "border-white border-[0.05rem] rounded-sm"
-                : ""
-            }`}
-            onClick={() => setCurrentImageIndex(index)} // Set the current image index on click
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={166}
-              height={100}
-              className="object-cover"
-            />
-          </div>
-        ))}
-      </div>
-
-      <button className="prev absolute top-1/2 left-10 transform -translate-y-1/2 bg-white p-2 border cursor-pointer">
-        Previous
-      </button>
-      <button className="next absolute top-1/2 right-10 transform -translate-y-1/2 bg-white p-2 border cursor-pointer">
-        Next
-      </button>
+      <div className="active-img-indicator absolute pointer-events-none w-[27vw] lg:w-[11vw] aspect-video top-[90vh] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm  mix-blend-difference z-[2px]"></div>
       <div className="drag-proxy hidden absolute"></div>
     </div>
   );
@@ -251,56 +232,105 @@ const images = [
     title: "Spring Cut Day 64 - Back",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg2.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 2",
-    title: "Spring Cut Day 65 - Side",
+    title: "Spring Cut Day 45 - Arms",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg3.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 3",
     title: "Spring Cut Day 66 - Front",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg4.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 4",
     title: "Spring Cut Day 67 - Other Side",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg5.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 4",
-    title: "Spring Cut Day 0 - Other Side",
+    title: "Spring Cut Day 27 - Chest",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg6.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 4",
-    title: "Spring Cut Day 68 - Other Side",
+    title: "Spring Cut Day 56 - Back",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg7.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 56 - Back",
+  },
+  {
+    src: "/assets/SamImg8.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 4",
     title: "Spring Cut Day 67 - Other Side",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg9.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 4",
     title: "Spring Cut Day 67 - Other Side",
   },
   {
-    src: "/assets/SamImg1.jpg",
+    src: "/assets/SamImg10.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Back",
+  },
+  {
+    src: "/assets/SamImg11.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 67 - Back",
+  },
+  {
+    src: "/assets/SamImg12.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 56 - Back",
+  },
+  {
+    src: "/assets/SamImg13.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 56 - Back",
+  },
+  {
+    src: "/assets/SamImg14.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 56 - Back",
+  },
+  {
+    src: "/assets/SamImg15.jpg",
+    width: 985,
+    height: 491,
+    alt: "Sam Image 4",
+    title: "Spring Cut Day 42 - Legs",
+  },
+  {
+    src: "/assets/SamImg16.jpg",
     width: 985,
     height: 491,
     alt: "Sam Image 4",

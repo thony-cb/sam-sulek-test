@@ -50,84 +50,6 @@ const GsapHorizontalLoop: React.FC = () => {
   const containerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    // const controlPanel = new Pane({ title: "Config", expanded: false });
-
-    // controlPanel.addBinding(CONFIG, "animate", { label: "Animate" });
-    // controlPanel.addBinding(CONFIG, "debug", { label: "Debug" });
-    // controlPanel.addBinding(CONFIG, "backface", { label: "Backface" });
-    // controlPanel.addBinding(CONFIG, "perspective", {
-    //   label: "Perspective (px)",
-    //   min: 50,
-    //   max: 1500,
-    //   step: 1,
-    // });
-    // controlPanel.addBinding(CONFIG, "gap", {
-    //   label: "Gap (%)",
-    //   min: 0,
-    //   max: 5,
-    //   step: 0.1,
-    // });
-    // controlPanel.addBinding(CONFIG, "items", {
-    //   label: "Items",
-    //   min: 10,
-    //   max: 50,
-    //   step: 1,
-    // });
-    // controlPanel.addBinding(CONFIG, "dark", { label: "Dark Theme" });
-    // controlPanel.addBinding(CONFIG, "speed", {
-    //   label: "Speed",
-    //   min: 0.1,
-    //   max: 5,
-    //   step: 0.1,
-    // });
-
-    // const scrolling = controlPanel.addFolder({
-    //   title: "Scrolling",
-    //   expanded: false,
-    // });
-    // scrolling.addBinding(CONFIG, "scroll", { label: "Scroll Drive" });
-    // scrolling.addBinding(CONFIG, "vertical", { label: "Vertical" });
-    // scrolling.addBinding(CONFIG, "infinite", { label: "Infinite" });
-    // scrolling.addBinding(CONFIG, "buff", {
-    //   label: "Ratio",
-    //   min: 1,
-    //   max: 10,
-    //   step: 0.1,
-    // });
-
-    // const rotation = controlPanel.addFolder({
-    //   title: "Rotation",
-    //   expanded: false,
-    // });
-    // rotation.addBinding(CONFIG, "rotatex", {
-    //   min: 0,
-    //   max: 360,
-    //   step: 1,
-    //   label: "X",
-    // });
-    // rotation.addBinding(CONFIG, "rotatez", {
-    //   min: 0,
-    //   max: 360,
-    //   step: 1,
-    //   label: "Z",
-    // });
-
-    // const masker = controlPanel.addFolder({ title: "Mask", expanded: false });
-    // masker.addBinding(CONFIG, "masklower", {
-    //   label: "Lower (Item W)",
-    //   min: 0,
-    //   max: 5,
-    //   step: 0.1,
-    // });
-    // masker.addBinding(CONFIG, "maskupper", {
-    //   label: "Upper (Item W)",
-    //   min: 0,
-    //   max: 5,
-    //   step: 0.1,
-    // });
-
-    // controlPanel.on("change", sync);
-
     // Create the horizontal loop animation
     let loop = horizontalLoop(containerRef.current?.children, {
       repeat: -1,
@@ -139,6 +61,7 @@ const GsapHorizontalLoop: React.FC = () => {
       target: containerRef.current,
       type: "pointer,touch,wheel",
       wheelSpeed: -1,
+
       onChange: (self) => {
         loop.timeScale(
           Math.abs(self.deltaX) > Math.abs(self.deltaY)
@@ -146,14 +69,9 @@ const GsapHorizontalLoop: React.FC = () => {
             : -self.deltaY
         );
         slow.invalidate().restart();
+        loop.toIndex(loop.current);
       },
     });
-
-    function sync() {
-      // Sync the CONFIG with the GSAP animation
-      loop.vars.speed = CONFIG.speed;
-      loop.invalidate();
-    }
   }, []);
 
   return (

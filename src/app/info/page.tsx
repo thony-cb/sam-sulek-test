@@ -4,13 +4,13 @@ import React from "react";
 
 export default function page() {
   return (
-    <section className="flex flex-row justify-between  pt-20 w-full min-h-screen">
-      <div className="flex flex-col gap-3 text-md">
+    <section className="flex flex-col lg:flex-row justify-start gap-20 text-sm lg:text-md pt-20 w-full min-h-screen">
+      <div className="flex flex-col gap-3 ">
         <h1 className="font-bold">About</h1>
         <p>Sam Sulek is a Hosstile Athlete Use code: SAM</p>
         <p>Sam posts’ bodybuilding content on youtube</p>
       </div>
-      <div className="flex flex-col gap-3 text-md">
+      <div className="flex flex-col gap-3 ">
         <h2 className="font-bold">Credits</h2>
         <p>
           All content owned by{" "}
@@ -24,7 +24,7 @@ export default function page() {
           </a>
         </p>
       </div>
-      <div className="flex flex-col gap-3 text-md">
+      <div className="flex flex-col gap-3 ">
         <h3 className="font-bold">Website Info</h3>
         <p>
           Passion Project by{" "}
@@ -37,10 +37,10 @@ export default function page() {
           </a>
         </p>
       </div>
-      <div className="flex flex-col gap-3 text-md">
+      {/* <div className="flex flex-col gap-3 ">
         <h3 className="font-bold">Theme</h3>
         <ModeToggle />
-      </div>
+      </div> */}
     </section>
   );
 }
